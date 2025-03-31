@@ -1,0 +1,103 @@
+Artificial Intelligence (AI) has revolutionized the way we approach programming and software development. With the advent of AI-powered tools, developers can now automate repetitive tasks, optimize code, and even generate entire programs from scratch. For instance, AI can generate C code for specific tasks, such as sorting algorithms. Below is an example of AI-generated C code for a bubble sort algorithm:
+#include <stdio.h>
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n-1; i++) {
+        for (int j = 0; j < n-i-1; j++) {
+            if (arr[j] > arr[j+1]) {
+                int temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {64, 34, 25, 12, 22, 11, 90};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    bubbleSort(arr, n);
+    printf("Sorted array: \n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    return 0;
+}
+
+AI is also capable of generating code for mathematical operations, such as calculating the factorial of a number. This is particularly useful for educational purposes, as it allows students to focus on understanding the logic rather than writing the code from scratch. Below is an example of AI-generated C code for calculating the factorial of a number:
+
+#include <stdio.h>
+
+int factorial(int n) {
+    if (n == 0 || n == 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+
+int main() {
+    int num = 5;
+    printf("Factorial of %d is %d\n", num, factorial(num));
+    return 0;
+}
+
+AI can also assist in generating code for data structures, such as linked lists. Linked lists are fundamental in computer science, and AI can help developers implement them quickly and accurately. Below is an example of AI-generated C code for a singly linked list:
+
+c
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void printList(struct Node* n) {
+    while (n != NULL) {
+        printf("%d ", n->data);
+        n = n->next;
+    }
+}
+
+int main() {
+    struct Node* head = NULL;
+    struct Node* second = NULL;
+    struct Node* third = NULL;
+
+    head = (struct Node*)malloc(sizeof(struct Node));
+    second = (struct Node*)malloc(sizeof(struct Node));
+    third = (struct Node*)malloc(sizeof(struct Node));
+
+    head->data = 1;
+    head->next = second;
+
+    second->data = 2;
+    second->next = third;
+
+    third->data = 3;
+    third->next = NULL;
+
+    printList(head);
+    return 0;
+}
+
+File handling is a crucial aspect of programming, and AI can generate code to read from and write to files. This is particularly useful for developers who need to process large datasets or log files. Below is an example of AI-generated C code for writing to a file:
+
+#include <stdio.h>
+
+int main() {
+    FILE *filePointer;
+    filePointer = fopen("example.txt", "w");
+
+    if (filePointer == NULL) {
+        printf("File could not be opened.\n");
+        return 1;
+    }
+
+    fprintf(filePointer, "This is a sample text written to a file.\n");
+    fclose(filePointer);
+
+    printf("Text written to file successfully.\n");
+    return 0;
+}
