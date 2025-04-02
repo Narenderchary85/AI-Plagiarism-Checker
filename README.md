@@ -20,7 +20,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 ![Alt Text](https://github.com/Narenderchary85/AI-Plagiarism-Checker/blob/master/frontend/public/teacherview.png)
 
 
-<h1>MyLinks Port</h1>
+<h1>Plagiarism Port</h1>
 
 ![Alt Text](https://github.com/Narenderchary85/AI-Plagiarism-Checker/blob/master/frontend/public/similarity.png)
 
