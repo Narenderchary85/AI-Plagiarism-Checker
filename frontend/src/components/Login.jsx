@@ -19,14 +19,13 @@ const Login = () => {
         const { message, token, user_id, role } = response.data; 
 
         if (token) {
-            localStorage.setItem("authToken", token);  // Store token for authenticated requests
+            localStorage.setItem("authToken", token);  
             localStorage.setItem("userId", user_id);
             localStorage.setItem("role", role);
 
             console.log("User ID:", user_id, "Role:", role);
             alert(message);
 
-            // Redirect based on role
             if (role === 'student') {
                 setRedirectPath('/student');
             } else if (role === 'teacher') {

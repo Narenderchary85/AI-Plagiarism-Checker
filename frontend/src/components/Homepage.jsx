@@ -47,11 +47,10 @@ const Homepage = () => {
 
   return (
     <div className="homepage">
-      {/* Navigation Bar */}
       <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
         <div className="logo">
           <span className="logo-icon">📚</span>
-          <span>EduConnect</span>
+          <span>AI-Plagiasrim Checker</span>
         </div>
         <div className="nav-links">
           <a href="#features">Features</a>
@@ -66,7 +65,6 @@ const Homepage = () => {
         <button className="mobile-menu-btn">☰</button>
       </nav>
 
-      {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
           <h1 className="hero-title">
@@ -91,8 +89,6 @@ const Homepage = () => {
           </div>
         </div>
       </section>
-
-      {/* Features Section */}
       <section id="features" className="features-section">
         <h2 className="section-title">Powerful Features</h2>
         <p className="section-subtitle">Everything you need to succeed in your academic journey</p>
@@ -124,7 +120,6 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* How It Works Section */}
       <section id="how-it-works" className="how-it-works">
         <h2 className="section-title">How It Works</h2>
         <p className="section-subtitle">Simple steps to get started with our platform</p>
@@ -148,7 +143,6 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
       <section id="testimonials" className="testimonials">
         <h2 className="section-title">What Our Users Say</h2>
         <p className="section-subtitle">Trusted by students and educators worldwide</p>
@@ -177,7 +171,7 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Newsletter */}
+
       <section className="newsletter">
         <div className="newsletter-content">
           <h2>Stay Updated</h2>
@@ -195,11 +189,10 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-section">
-            <h3>EduConnect</h3>
+            <h3>AI-Plagiasrim Checker</h3>
             <p>Empowering the future of education through innovative technology.</p>
             <div className="social-icons">
               <a href="#"><span>📱</span></a>
@@ -231,7 +224,7 @@ const Homepage = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© {new Date().getFullYear()} EduConnect. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} AI-Plagiasrim Checker. All rights reserved.</p>
         </div>
       </footer>
     </div>
