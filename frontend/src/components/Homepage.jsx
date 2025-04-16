@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Homepage.css';
+import { Link } from 'react-router';
 
 const Homepage = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -59,8 +60,8 @@ const Homepage = () => {
           <a href="#pricing">Pricing</a>
         </div>
         <div className="auth-buttons">
-          <button className="login-btn">Login</button>
-          <button className="signup-btn">Sign Up</button>
+         <Link to="/login"> <button className="login-btn">Login</button></Link>
+          <Link to="/signin"><button className="signup-btn">Sign Up</button></Link>
         </div>
         <button className="mobile-menu-btn">☰</button>
       </nav>
