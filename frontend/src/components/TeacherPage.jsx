@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';  // Import useNavigate
+import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import './TeacherPage.css';
+import { FiPlus, FiLogOut, FiHelpCircle, FiBook, FiUpload, FiUsers, FiSettings } from 'react-icons/fi';
+import { FaChalkboardTeacher } from 'react-icons/fa';
 
 const TeacherPage = () => {
     const [ispop, setIsPop] = useState(false);
     const [classrooms, setClassrooms] = useState([]);
-    const navigate = useNavigate();  // Initialize navigate
+    const [activeTab, setActiveTab] = useState('classrooms');
+    const [searchTerm, setSearchTerm] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchClassrooms();
@@ -37,20 +42,13 @@ const TeacherPage = () => {
             console.error("Error fetching classrooms:", error);
         }
     };
-    
 
     const createClassroom = async () => {
-        const groupName = document.querySelector(".inp-grp").value;
-        const userRole = localStorage.getItem("role");
-        const token = localStorage.getItem("authToken"); // Get JWT token
+        const groupName = document.querySelector(".classroom-name-input").value;
+        const token = localStorage.getItem("authToken");
     
         if (!groupName) {
             alert("Please enter a classroom name!");
-            return;
-        }
-    
-        if (userRole !== "teacher") {
-            alert("Only teachers can create classrooms!");
             return;
         }
     
@@ -59,78 +57,254 @@ const TeacherPage = () => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}` // Send token for authentication
+                    "Authorization": `Bearer ${token}`
                 },
-                body: JSON.stringify({ classroom_name: groupName }) // Only send classroom name
+                body: JSON.stringify({ classroom_name: groupName })
             });
     
             const data = await response.json();
-            alert(data.message);
-    
+            
             if (response.ok) {
-                setClassrooms([...classrooms, groupName]);
+                setClassrooms([...classrooms, { name: groupName, createdAt: new Date().toISOString() }]);
                 setIsPop(false);
+                // Show success notification
+            } else {
+                alert(data.message || "Failed to create classroom");
             }
         } catch (error) {
             console.error("Error creating classroom:", error);
             alert("Failed to create classroom.");
         }
     };
-    
 
     const handleClassroomClick = (classroom) => {
-        navigate(`/similarity/${classroom}`);  // Navigate to Similarity page with classroom name
+        navigate(`/similarity/${classroom}`);  
+    };
+
+
+    const handleLogout = () => {
+        localStorage.clear();
+        navigate('/');
     };
 
     return (
-        <div className='teacher-bdy'>
-            <nav className='teach-nav'>
-                <div className="plg">Plagiarism Checker</div>
-                <div className="create" onClick={() => setIsPop(true)}>Create</div>
-                <div className="help">Help</div>
-                <div className="my-assig">My Assignments</div>
-            </nav>
-
-            <div className="sub-bdy-t">
-                <div className="left-side-t">
-                    <div className="submisions">Submissions</div>
-                    <div className="assignts">Assignments</div>
-                    <div className="log-out" onClick={() => {
-                        localStorage.clear();
-                        window.location.href = "/";
-                    }}>Logout</div>
+        <motion.div 
+            className='teacher-portal'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+        >
+            {/* Sidebar */}
+            <motion.div 
+                className="sidebar"
+                initial={{ x: -50 }}
+                animate={{ x: 0 }}
+                transition={{ duration: 0.4 }}
+            >
+                <div className="sidebar-header">
+                    <FaChalkboardTeacher className="teacher-icon" />
+                    <h2>Educator Portal</h2>
                 </div>
 
-                {classrooms.length > 0 ? (
-                    classrooms.map((classroom, index) => (
-                        <div 
-                            key={index} 
-                            className="sub-t" 
-                            onClick={() => handleClassroomClick(classroom)} // Navigate on click
-                            style={{ cursor: "pointer" }}  // Indicate clickable element
-                        >
-                            <div className="sub-class">{classroom}</div>
+                <div className="sidebar-menu">
+                    <motion.div 
+                        className={`menu-item ${activeTab === 'classrooms' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('classrooms')}
+                        whileHover={{ scale: 1.02 }}
+                    >
+                        <FiBook className="menu-icon" />
+                        <span>My Classrooms</span>
+                    </motion.div>
+
+                    <motion.div 
+                        className={`menu-item ${activeTab === 'assignments' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('assignments')}
+                        whileHover={{ scale: 1.02 }}
+                    >
+                        <FiUpload className="menu-icon" />
+                        <span>Assignments</span>
+                    </motion.div>
+
+                    <motion.div 
+                        className={`menu-item ${activeTab === 'students' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('students')}
+                        whileHover={{ scale: 1.02 }}
+                    >
+                        <FiUsers className="menu-icon" />
+                        <span>Students</span>
+                    </motion.div>
+
+                    <motion.div 
+                        className={`menu-item ${activeTab === 'settings' ? 'active' : ''}`}
+                        onClick={() => setActiveTab('settings')}
+                        whileHover={{ scale: 1.02 }}
+                    >
+                        <FiSettings className="menu-icon" />
+                        <span>Settings</span>
+                    </motion.div>
+                </div>
+
+                <motion.div 
+                    className="logout-btn"
+                    onClick={handleLogout}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <FiLogOut className="logout-icon" />
+                    <span>Logout</span>
+                </motion.div>
+            </motion.div>
+
+            {/* Main Content */}
+            <div className="main-content">
+                {/* Top Navigation */}
+                <div className="top-nav">
+                    <h1 className="page-title">
+                        {activeTab === 'classrooms' && 'My Classrooms'}
+                        {activeTab === 'assignments' && 'Assignments'}
+                        {activeTab === 'students' && 'Students'}
+                        {activeTab === 'settings' && 'Settings'}
+                    </h1>
+
+                    <div className="nav-actions">
+                        <div className="search-bar">
+                            <input 
+                                type="text" 
+                                placeholder="Search classrooms..." 
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                            />
                         </div>
-                    ))
-                ) : (
-                    <div>No classrooms created yet.</div>
-                )}
+
+                        <motion.button 
+                            className="create-btn"
+                            onClick={() => setIsPop(true)}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                        >
+                            <FiPlus className="plus-icon" />
+                            <span>Create Classroom</span>
+                        </motion.button>
+                    </div>
+                </div>
+
+                {/* Content Area */}
+                <div className="content-area">
+                    {activeTab === 'classrooms' && (
+                        <div className="classrooms-grid">
+                            {classrooms.length > 0 ? (
+                                classrooms.map((classroom, index) => (
+                                    <motion.div
+                                        key={index}
+                                        className="classroom-card"
+                                        onClick={() => handleClassroomClick(classroom)}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: index * 0.1, duration: 0.3 }}
+                                        whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
+                                    >
+                                        <div className="classroom-icon">
+                                            <FaChalkboardTeacher />
+                                        </div>
+                                        <h3>{classroom.name}</h3>
+                                        <p>Created: {new Date(classroom.createdAt).toLocaleDateString()}</p>
+                                        <div className="students-count">25 Students</div>
+                                    </motion.div>
+                                ))
+                            ) : (
+                                <motion.div 
+                                    className="empty-state"
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ duration: 0.5 }}
+                                >
+                                    <img src="/empty-classroom.svg" alt="No classrooms" />
+                                    <h3>No classrooms found</h3>
+                                    <p>Create your first classroom to get started</p>
+                                    <button 
+                                        className="create-first-btn"
+                                        onClick={() => setIsPop(true)}
+                                    >
+                                        Create Classroom
+                                    </button>
+                                </motion.div>
+                            )}
+                        </div>
+                    )}
+
+                    {activeTab === 'assignments' && (
+                        <div className="assignments-view">
+                            {/* Assignments content would go here */}
+                        </div>
+                    )}
+
+                    {activeTab === 'students' && (
+                        <div className="students-view">
+                            {/* Students content would go here */}
+                        </div>
+                    )}
+
+                    {activeTab === 'settings' && (
+                        <div className="settings-view">
+                            {/* Settings content would go here */}
+                        </div>
+                    )}
+                </div>
             </div>
 
-            {ispop && (
-                <>
-                    <div className="overlay" onClick={() => setIsPop(false)}></div>
-                    <div className='popup'>
-                        <div className="popup-content">
-                            <button className="close-btn" onClick={() => setIsPop(false)}>X</button>
-                            <div className="grp">Group Name:</div>
-                            <input type="text" placeholder='Group Name' className='inp-grp'/>
-                            <button className='btn-stu' onClick={createClassroom}>CREATE</button>
-                        </div>
-                    </div>
-                </>
-            )}
-        </div>
+            {/* Create Classroom Popup */}
+            <AnimatePresence>
+                {ispop && (
+                    <motion.div 
+                        className="popup-overlay"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setIsPop(false)}
+                    >
+                        <motion.div 
+                            className="create-popup"
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <h2>Create New Classroom</h2>
+                            <div className="form-group">
+                                <label>Classroom Name</label>
+                                <input 
+                                    type="text" 
+                                    className="classroom-name-input"
+                                    placeholder="e.g. Computer Science 101"
+                                    autoFocus
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label>Description (Optional)</label>
+                                <textarea 
+                                    className="classroom-desc-input"
+                                    placeholder="What's this classroom about?"
+                                />
+                            </div>
+                            <div className="popup-actions">
+                                <button 
+                                    className="cancel-btn"
+                                    onClick={() => setIsPop(false)}
+                                >
+                                    Cancel
+                                </button>
+                                <button 
+                                    className="create-classroom-btn"
+                                    onClick={createClassroom}
+                                >
+                                    Create Classroom
+                                </button>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </motion.div>
     );
 };
 
