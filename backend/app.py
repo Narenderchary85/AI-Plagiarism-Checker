@@ -283,6 +283,24 @@ def check_classroom_plagiarism(classroom_name):
     
     return jsonify({"results": results})
 
+@app.route('/get-classroom-files/<classroom_name>', methods=['GET'])
+def get_classroom_files(classroom_name):
+    
+    folder_path = os.path.join(app.config["UPLOAD_FOLDER"], classroom_name)
+
+    if not os.path.exists(folder_path):
+        return jsonify({"error": "Classroom folder not found"}), 404
+
+    files = os.listdir(folder_path)
+    return jsonify({"files": files})
+
+from flask import send_from_directory
+
+@app.route('/uploads/<classroom_name>/<filename>')
+def serve_file(classroom_name, filename):
+    folder_path = os.path.join(app.config["UPLOAD_FOLDER"], classroom_name)
+    return send_from_directory(folder_path, filename)
+
 # @app.route("/classify-text/<classroom_name>", methods=["GET"])
 # def classify_classroom_text(classroom_name):
 #     import os
