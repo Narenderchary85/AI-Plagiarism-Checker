@@ -426,3 +426,10 @@
       padding: 24px;
     }
   }
+
+  .assignments-view{
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    width:'full';
+  }

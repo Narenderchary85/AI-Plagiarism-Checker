@@ -65,7 +65,7 @@ const TeacherPage = () => {
             const data = await response.json();
             
             if (response.ok) {
-                setClassrooms([...classrooms, { name: groupName, createdAt: new Date().toISOString() }]);
+                setClassrooms([...classrooms, { name: groupName}]);
                 setIsPop(false);
                 // Show success notification
             } else {
@@ -80,6 +80,10 @@ const TeacherPage = () => {
     const handleClassroomClick = (classroom) => {
         navigate(`/similarity/${classroom}`);  
     };
+
+    const handleAssignmentClick=(classroom)=>{
+        navigate(`/assignment-view/${classroom}`)
+    }
 
 
     const handleLogout = () => {
@@ -206,9 +210,8 @@ const TeacherPage = () => {
                                         <div className="classroom-icon">
                                             <FaChalkboardTeacher />
                                         </div>
-                                        <h3>{classroom.name}</h3>
-                                        <p>Created: {new Date(classroom.createdAt).toLocaleDateString()}</p>
-                                        <div className="students-count">25 Students</div>
+                                        <h3>{classroom}</h3>
+                                        <div className="students-count">Plagiarism Check</div>
                                     </motion.div>
                                 ))
                             ) : (
@@ -233,8 +236,26 @@ const TeacherPage = () => {
                     )}
 
                     {activeTab === 'assignments' && (
-                        <div className="assignments-view">
-                            {/* Assignments content would go here */}
+                        <div className="classrooms-grid">
+                            {
+                                classrooms.map((classroom, index) => (
+                                    <motion.div
+                                        key={index}
+                                        className="classroom-card"
+                                        onClick={() => handleAssignmentClick(classroom)}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: index * 0.1, duration: 0.3 }}
+                                        whileHover={{ y: -5, boxShadow: "0 10px 20px rgba(0,0,0,0.1)" }}
+                                    >
+                                        <div className="classroom-icon">
+                                            <FaChalkboardTeacher />
+                                        </div>
+                                        <h3>{classroom}</h3>
+                                        <div className="students-count">Show Assignments</div>
+                                    </motion.div>
+                                ))
+                            }
                         </div>
                     )}
 
