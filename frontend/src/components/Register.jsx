@@ -63,7 +63,6 @@ const Register = () => {
           </motion.div>
         </div>
         <div className='illustration-container'>
-          {/* You can add an SVG illustration here */}
         </div>
       </div>
 

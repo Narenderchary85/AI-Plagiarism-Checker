@@ -20,7 +20,6 @@
     background-color: var(--white);
   }
   
-  /* Login Container */
   .login-container {
     display: flex;
     min-height: 100vh;
@@ -66,7 +65,6 @@
     color: var(--text-light);
   }
   
-  /* Login Form */
   .login-form {
     display: flex;
     flex-direction: column;

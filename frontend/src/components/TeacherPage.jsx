@@ -67,7 +67,7 @@ const TeacherPage = () => {
             if (response.ok) {
                 setClassrooms([...classrooms, { name: groupName}]);
                 setIsPop(false);
-                // Show success notification
+
             } else {
                 alert(data.message || "Failed to create classroom");
             }
@@ -98,7 +98,6 @@ const TeacherPage = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.3 }}
         >
-            {/* Sidebar */}
             <motion.div 
                 className="sidebar"
                 initial={{ x: -50 }}
@@ -158,10 +157,7 @@ const TeacherPage = () => {
                     <span>Logout</span>
                 </motion.div>
             </motion.div>
-
-            {/* Main Content */}
             <div className="main-content">
-                {/* Top Navigation */}
                 <div className="top-nav">
                     <h1 className="page-title">
                         {activeTab === 'classrooms' && 'My Classrooms'}
@@ -191,8 +187,6 @@ const TeacherPage = () => {
                         </motion.button>
                     </div>
                 </div>
-
-                {/* Content Area */}
                 <div className="content-area">
                     {activeTab === 'classrooms' && (
                         <div className="classrooms-grid">
@@ -261,19 +255,18 @@ const TeacherPage = () => {
 
                     {activeTab === 'students' && (
                         <div className="students-view">
-                            {/* Students content would go here */}
+
                         </div>
                     )}
 
                     {activeTab === 'settings' && (
                         <div className="settings-view">
-                            {/* Settings content would go here */}
+      
                         </div>
                     )}
                 </div>
             </div>
 
-            {/* Create Classroom Popup */}
             <AnimatePresence>
                 {ispop && (
                     <motion.div 
