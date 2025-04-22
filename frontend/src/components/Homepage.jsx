@@ -86,7 +86,7 @@ const Homepage = () => {
             <div className="floating-card card3">📊 Analytics</div>
           </div>
           <div className="main-image">
-            <img src="https://illustrations.popsy.co/amber/student-sitting-at-desk.svg" alt="Student learning" />
+            {/* <img src="https://illustrations.popsy.co/amber/student-sitting-at-desk.svg" alt="Student learning" /> */}
           </div>
         </div>
       </section>
