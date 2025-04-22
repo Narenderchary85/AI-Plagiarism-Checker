@@ -35,6 +35,7 @@ import StudentPage from "./components/StudentPage";
 import TeacherPage from "./components/TeacherPage";
 import Similarity from "./components/Similarity";
 import Login from "./components/Login";
+import AssignmentsView from "./components/AssignmentsView";
 
 function App() {
   return (
@@ -42,11 +43,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/example" element={<Example />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/signin" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/student" element={<StudentPage />} />
         <Route path="/teacher" element={<TeacherPage />} />
         <Route path="/similarity/:classroom" element={<Similarity />} />
+        <Route path="/assignment-view/:classroom" element={<AssignmentsView/>}/>
       </Routes>
     </ClassroomProvider>
   );
