@@ -24,21 +24,22 @@ const Homepage = () => {
 
   const features = [
     {
-      title: "Instant Grading",
-      description: "Get immediate feedback on your assignments with our AI-powered grading system.",
+      title: "AI-Powered Detection",
+      description: "Scan your documents in real-time with high-accuracy AI plagiarism detection.",
+      icon: "🧠"
+    },
+    {
+      title: "Deep Content Analysis",
+      description: "Break down your writing structure and citation sources using advanced NLP.",
+      icon: "📄"
+    },
+    {
+      title: "User Dashboard",
+      description: "Track your reports, submission history, and analysis insights in one place.",
       icon: "📊"
-    },
-    {
-      title: "Plagiarism Check",
-      description: "Ensure academic integrity with our comprehensive plagiarism detection.",
-      icon: "🔍"
-    },
-    {
-      title: "Collaborative Learning",
-      description: "Work together with classmates in real-time collaborative spaces.",
-      icon: "👥"
     }
   ];
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,7 +57,6 @@ const Homepage = () => {
         <div className="nav-links">
           <a href="#features">Features</a>
           <a href="#how-it-works">How It Works</a>
-          <a href="#testimonials">Testimonials</a>
           <a href="#pricing">Pricing</a>
         </div>
         <div className="auth-buttons">
@@ -68,22 +68,23 @@ const Homepage = () => {
 
       <section className="hero">
         <div className="hero-content">
-          <h1 className="hero-title">
-            Transform Your <span className="highlight">Learning Experience</span>
-          </h1>
-          <p className="hero-subtitle">
-            The all-in-one platform for students and educators to connect, collaborate, and achieve academic success.
-          </p>
+        <h1 className="hero-title">
+          Empower Your <span className="highlight">Academic Integrity</span>
+        </h1>
+        <p className="hero-subtitle">
+          Detect plagiarism, analyze assignments, and maintain originality — all in one powerful platform.
+        </p>
+
           <div className="hero-buttons">
-            <button className="primary-btn">Get Started</button>
-            <button className="secondary-btn">Watch Demo</button>
+          <Link to="/signin"><button className="primary-btn">Try It Free</button></Link>
+          <button className="secondary-btn">How It Works</button>
           </div>
         </div>
         <div className="hero-image">
           <div className="floating-elements">
-            <div className="floating-card card1">📝 Assignment Tool</div>
-            <div className="floating-card card2">🎯 Grade Tracker</div>
-            <div className="floating-card card3">📊 Analytics</div>
+          <div className="floating-card card1">📃 Plagiarism Scan</div>
+          <div className="floating-card card2">📈 Progress Reports</div>
+          <div className="floating-card card3">📂 Submission History</div>
           </div>
           <div className="main-image">
             {/* <img src="https://illustrations.popsy.co/amber/student-sitting-at-desk.svg" alt="Student learning" /> */}
@@ -128,50 +129,21 @@ const Homepage = () => {
         <div className="steps-container">
           <div className="step">
             <div className="step-number">1</div>
-            <h3>Create Account</h3>
-            <p>Sign up as student or educator in just 2 minutes</p>
+            <h3>Upload Document</h3>
+            <p>Select the file you want to scan for plagiarism.</p>
           </div>
           <div className="step">
             <div className="step-number">2</div>
-            <h3>Set Up Profile</h3>
-            <p>Add your courses and academic information</p>
+            <h3>Scan & Analyze</h3>
+            <p>Our AI analyzes your document for originality and citation issues.</p>
           </div>
           <div className="step">
             <div className="step-number">3</div>
-            <h3>Start Learning</h3>
-            <p>Access all features and begin your journey</p>
+            <h3>Download Report</h3>
+            <p>Get a detailed report with matched sources and percentage score.</p>
           </div>
         </div>
       </section>
-
-      <section id="testimonials" className="testimonials">
-        <h2 className="section-title">What Our Users Say</h2>
-        <p className="section-subtitle">Trusted by students and educators worldwide</p>
-        
-        <div className="testimonial-cards">
-          <div className="testimonial-card">
-            <div className="quote">“This platform transformed how I manage my coursework. The assignment tracker is a lifesaver!”</div>
-            <div className="user">
-              <div className="avatar">👩‍🎓</div>
-              <div className="user-info">
-                <h4>Sarah Johnson</h4>
-                <p>Computer Science Student</p>
-              </div>
-            </div>
-          </div>
-          <div className="testimonial-card">
-            <div className="quote">“As an instructor, the grading tools have saved me hours each week. Highly recommended!”</div>
-            <div className="user">
-              <div className="avatar">👨‍🏫</div>
-              <div className="user-info">
-                <h4>Prof. David Chen</h4>
-                <p>Mathematics Department</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
 
       <section className="newsletter">
         <div className="newsletter-content">

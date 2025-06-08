@@ -124,7 +124,6 @@ const Login = () => {
       </div>
 
       <div className="login-illustration">
-        <img src="https://illustrations.popsy.co/amber/secure-login.svg" alt="Secure login" />
         <div className="features-list">
           <div className="feature-item">
             <i className="fas fa-check-circle"></i>

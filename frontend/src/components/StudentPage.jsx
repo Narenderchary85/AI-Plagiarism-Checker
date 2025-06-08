@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './StudentPage.css';
+import { useNavigate } from 'react-router-dom';
 
 const StudentPage = () => {
   const [isPop, setIsPop] = useState(false);
@@ -8,6 +9,7 @@ const StudentPage = () => {
   const [files, setFiles] = useState(null);
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate=useNavigate()
 
   const handleFileChange = (event) => {
     if (event.target.files) {
@@ -59,14 +61,19 @@ const StudentPage = () => {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
+};
+
   return (
     <div className='student-page'>
       <nav className='navbar'>
         <div className="navbar-brand">PlagiarismCheck</div>
         <div className="navbar-links">
-          <a href="#" className="nav-link active">Create</a>
+          {/* <a href="#" className="nav-link active">Create</a>
           <a href="#" className="nav-link">Help</a>
-          <a href="#" className="nav-link">My Assignments</a>
+          <a href="#" className="nav-link">My Assignments</a> */}
         </div>
       </nav>
 
@@ -77,12 +84,9 @@ const StudentPage = () => {
             <li className="menu-item active">
               <i className="fas fa-upload"></i> Submissions
             </li>
-            <li className="menu-item">
-              <i className="fas fa-tasks"></i> Assignments
-            </li>
-            <li className="menu-item">
+            <div className="menu-item" onClick={handleLogout}>
               <i className="fas fa-sign-out-alt"></i> Logout
-            </li>
+            </div>
           </ul>
         </div>
 

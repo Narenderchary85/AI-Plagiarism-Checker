@@ -177,14 +177,6 @@ const Register = () => {
             <span>or</span>
           </div>
 
-          <div className='social-auth'>
-            <button className='social-button google'>
-              Continue with Google
-            </button>
-            <button className='social-button microsoft'>
-              Continue with Microsoft
-            </button>
-          </div>
 
           <div className='login-redirect'>
             Already have an account? <a href="/login">Sign in</a>

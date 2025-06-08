@@ -128,14 +128,7 @@ const TeacherPage = () => {
                         <span>Assignments</span>
                     </motion.div>
 
-                    <motion.div 
-                        className={`menu-item ${activeTab === 'students' ? 'active' : ''}`}
-                        onClick={() => setActiveTab('students')}
-                        whileHover={{ scale: 1.02 }}
-                    >
-                        <FiUsers className="menu-icon" />
-                        <span>Students</span>
-                    </motion.div>
+                    
 
                     <motion.div 
                         className={`menu-item ${activeTab === 'settings' ? 'active' : ''}`}
@@ -215,7 +208,7 @@ const TeacherPage = () => {
                                     animate={{ opacity: 1 }}
                                     transition={{ duration: 0.5 }}
                                 >
-                                    <img src="/empty-classroom.svg" alt="No classrooms" />
+                                
                                     <h3>No classrooms found</h3>
                                     <p>Create your first classroom to get started</p>
                                     <button 
