@@ -126,7 +126,6 @@
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(30, 136, 229, 0.2);
   }
-  
   .mobile-menu-btn {
     display: none;
     background: none;
@@ -134,7 +133,6 @@
     font-size: 1.5rem;
     cursor: pointer;
   }
-  
   .hero {
     display: flex;
     justify-content: space-between;

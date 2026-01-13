@@ -1,13 +1,32 @@
 import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import fitz
+
+# def read_file(file_path):
+#     """Read file contents."""
+#     try:
+#         with open(file_path, "r", encoding="utf-8") as file:
+#             return file.read()
+#     except:
+#         return None
 
 def read_file(file_path):
-    """Read file contents."""
+    """Read contents of any text-based file. Convert PDF to text if needed."""
     try:
-        with open(file_path, "r", encoding="utf-8") as file:
-            return file.read()
-    except:
+        ext = os.path.splitext(file_path)[1].lower()
+
+        if ext == ".pdf":
+            text = ""
+            with fitz.open(file_path) as doc:
+                for page in doc:
+                    text += page.get_text()
+            return text
+        else:
+            with open(file_path, "r", encoding="utf-8", errors="ignore") as file:
+                return file.read()
+    except Exception as e:
+        print(f"Error reading {file_path}: {e}")
         return None
 
 def vectorize(content_list):

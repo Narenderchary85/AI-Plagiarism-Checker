@@ -49,6 +49,7 @@ const Register = () => {
     return <Navigate to='/login' />;
   }
 
+  
   return (
     <div className='register-container'>
       <div className='register-left-panel'>
